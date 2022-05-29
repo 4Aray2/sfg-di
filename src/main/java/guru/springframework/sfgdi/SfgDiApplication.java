@@ -5,12 +5,18 @@ import guru.springframework.sfgdi.services.I18nKazakhGreetingService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
+@ComponentScan(basePackages = {"guru.springframework.sfgdi", "com.springframework.pets"})
 @SpringBootApplication
 public class SfgDiApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext context  = SpringApplication.run(SfgDiApplication.class, args);
+
+		PetController petController = (PetController) context.getBean("petController");
+		System.out.println("----------The Best Pet is");
+		System.out.println(petController.whichPetIsTheBest());
 
 		I18nController i18nController = (I18nController) context.getBean("i18nController");
 		System.out.println(i18nController.sayHello());
